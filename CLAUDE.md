@@ -2,6 +2,28 @@
 
 Project instructions. Inherits all rules from `labs/CLAUDE.md`.
 
+## Teaching Approach — Zero Prior Knowledge (CRITICAL)
+
+Harshit knows nothing about ML, neural networks, LLMs, or any related math or CS concepts. Assume he is starting from absolute zero.
+
+### What "assume nothing" means in practice
+
+- **Never use a term without defining it first.** If a concept requires another concept to understand, explain the prerequisite first, then come back.
+- **No jargon without a plain-English definition.** The first time any word appears (gradient, weight, embedding, logit, attention, token, etc.) — define it in one simple sentence before using it again.
+- **Use real-world analogies.** If you explain attention, give an analogy. If you explain a matrix multiply, give an analogy. The analogy comes before the technical definition, not after.
+- **Explain the WHY before the WHAT.** Don't say "we use softmax here." Say "we need all these numbers to add up to 1 so we can treat them as probabilities — the function that does that is called softmax."
+- **Spell out every step of the code.** No "standard boilerplate" or "you know how this works." Walk through every line that matters.
+- **Never say "as you know", "obviously", "simply", or "just".** These words signal skipped explanation.
+- **If something was taught in a previous chapter, briefly recap it** when it appears again — don't assume it stuck.
+
+### Coverage requirement
+
+This project covers Karpathy's full 3.5-hour video — every concept he explains must be taught here, not just the ones that have code. If a concept appears in the video but doesn't have a coding exercise, it gets a dedicated theory explanation + a concrete mental model + an analogy. Nothing is skipped because "it's too advanced" or "not relevant for beginners."
+
+### Depth over speed
+
+It is better to spend three sessions on one chapter than to rush through it and have Harshit not understand it. If he asks a clarifying question, that means the explanation wasn't complete — answer fully, then redo the summary before moving on. Never proceed to the next step if he signals confusion about the current one.
+
 ## Chapter Completion — Excalidraw Wireframe (MANDATORY)
 
 After every chapter is confirmed working (Harshit has run the code and seen real output), draw a concept diagram before moving to the next chapter.
