@@ -24,6 +24,32 @@ This project covers Karpathy's full 3.5-hour video — every concept he explains
 
 It is better to spend three sessions on one chapter than to rush through it and have Harshit not understand it. If he asks a clarifying question, that means the explanation wasn't complete — answer fully, then redo the summary before moving on. Never proceed to the next step if he signals confusion about the current one.
 
+### One concept at a time — NO WALLS OF TEXT (CRITICAL)
+
+Never dump multiple concepts in a single response. Each message covers **exactly one concept**. After explaining it, stop and wait. Only move to the next concept after Harshit confirms he's understood or asks to continue.
+
+The format for each concept beat is:
+1. The concept (plain English, one idea only)
+2. A real-world analogy if it helps
+3. One or two sentences of "why this matters"
+4. Then: **"Ready to move on?"** or **"Any questions before we continue?"**
+
+If Harshit says "yes" / "continue" / "next" → move to the next concept only.
+Never pre-load the next idea at the end of a response.
+
+## Always query NotebookLM first (MANDATORY)
+
+Before teaching any concept or starting any chapter, query the NotebookLM notebook to get exactly what Karpathy says in the video. Never teach from general knowledge alone.
+
+Notebook ID: `c43662e9-4bcb-4f29-a8e0-9a4a7990d835`
+
+Query pattern:
+```
+notebooklm ask "<specific question about this concept>" --notebook c43662e9-4bcb-4f29-a8e0-9a4a7990d835
+```
+
+Use the video's exact examples, numbers, and analogies — not invented ones. If Karpathy uses a specific demo (e.g., zebra Wikipedia regurgitation), recreate that exact demo, not a generic version.
+
 ## Chapter Completion — Excalidraw Wireframe (MANDATORY)
 
 After every chapter is confirmed working (Harshit has run the code and seen real output), draw a concept diagram before moving to the next chapter.
