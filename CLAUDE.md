@@ -50,6 +50,53 @@ notebooklm ask "<specific question about this concept>" --notebook c43662e9-4bcb
 
 Use the video's exact examples, numbers, and analogies — not invented ones. If Karpathy uses a specific demo (e.g., zebra Wikipedia regurgitation), recreate that exact demo, not a generic version.
 
+## Chapter Notes — What to write (MANDATORY)
+
+After every chapter's concepts are fully taught, write the chapter's `notes.md` (e.g. `01-pretraining-data/notes.md`) before moving to the diagram. This is the reference Harshit will use to look back — it must be complete enough to reconstruct the session cold, without needing to re-read the conversation.
+
+### What every chapter notes.md must include
+
+1. **Every concept taught** — in order, with:
+   - Plain-English explanation (not a one-liner — full explanation as taught)
+   - The real-world analogy used
+   - Why it matters / what problem it solves
+2. **All worked examples** — any demo, number, or walkthrough used during the session (e.g. the BPE merge example, the zebra regurgitation demo)
+3. **Key numbers table** — every specific number mentioned (dataset sizes, costs, vocab sizes, etc.)
+4. **Q&A from the session** — every clarifying question Harshit asked, and the answer. These are often the most valuable part — they reveal the exact misconceptions that needed fixing.
+5. **Diagram URL** — under a `## Diagram` heading
+6. **Next** — one line: what the next chapter covers and why
+
+### What NOT to do
+
+- Don't write a bullet-point summary. Write full explanations.
+- Don't skip Q&A. If Harshit asked it, it matters.
+- Don't skip analogies. They're the part that sticks.
+
+### Also update the root notes.md
+
+After writing the chapter notes, update `notes.md` at the project root with a session log entry (newest at top):
+
+```
+## YYYY-MM-DD
+
+**What we covered:** [chapter + one-line summary of concepts]
+**What worked:** [anything notable]
+**What broke:** [any issues hit]
+**Next:** [next chapter + first concept]
+```
+
+Do this automatically — Harshit should never have to ask for it.
+
+### Commit order
+
+1. Write chapter `notes.md`
+2. Update root `notes.md`
+3. `git add` both files
+4. `git commit -m "docs(chN): complete chapter notes and session log"`
+5. `git push`
+
+---
+
 ## Chapter Completion — Excalidraw Wireframe (MANDATORY)
 
 After every chapter is confirmed working (Harshit has run the code and seen real output), draw a concept diagram before moving to the next chapter.
