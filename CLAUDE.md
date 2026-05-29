@@ -2,40 +2,13 @@
 
 Project instructions. Inherits all rules from `labs/CLAUDE.md`.
 
-## Teaching Approach — Zero Prior Knowledge (CRITICAL)
+## Teaching Approach — what's specific to this project
 
-Harshit knows nothing about ML, neural networks, LLMs, or any related math or CS concepts. Assume he is starting from absolute zero.
+The full labs teaching standards — assume zero knowledge, define every term before using it, prerequisite-first, why-before-what, real-world analogies, **one concept per message then stop**, spell out every line of code, never "obviously / simply / just", depth over speed, and "a clarifying question means *I* go deeper" — are inherited from `labs/CLAUDE.md` and **not repeated here**. This section is only the delta that makes karpathy stricter than a normal lab.
 
-### What "assume nothing" means in practice
-
-- **Never use a term without defining it first.** If a concept requires another concept to understand, explain the prerequisite first, then come back.
-- **No jargon without a plain-English definition.** The first time any word appears (gradient, weight, embedding, logit, attention, token, etc.) — define it in one simple sentence before using it again.
-- **Use real-world analogies.** If you explain attention, give an analogy. If you explain a matrix multiply, give an analogy. The analogy comes before the technical definition, not after.
-- **Explain the WHY before the WHAT.** Don't say "we use softmax here." Say "we need all these numbers to add up to 1 so we can treat them as probabilities — the function that does that is called softmax."
-- **Spell out every step of the code.** No "standard boilerplate" or "you know how this works." Walk through every line that matters.
-- **Never say "as you know", "obviously", "simply", or "just".** These words signal skipped explanation.
-- **If something was taught in a previous chapter, briefly recap it** when it appears again — don't assume it stuck.
-
-### Coverage requirement
-
-This project covers Karpathy's full 3.5-hour video — every concept he explains must be taught here, not just the ones that have code. If a concept appears in the video but doesn't have a coding exercise, it gets a dedicated theory explanation + a concrete mental model + an analogy. Nothing is skipped because "it's too advanced" or "not relevant for beginners."
-
-### Depth over speed
-
-It is better to spend three sessions on one chapter than to rush through it and have Harshit not understand it. If he asks a clarifying question, that means the explanation wasn't complete — answer fully, then redo the summary before moving on. Never proceed to the next step if he signals confusion about the current one.
-
-### One concept at a time — NO WALLS OF TEXT (CRITICAL)
-
-Never dump multiple concepts in a single response. Each message covers **exactly one concept**. After explaining it, stop and wait. Only move to the next concept after Harshit confirms he's understood or asks to continue.
-
-The format for each concept beat is:
-1. The concept (plain English, one idea only)
-2. A real-world analogy if it helps
-3. One or two sentences of "why this matters"
-4. Then: **"Ready to move on?"** or **"Any questions before we continue?"**
-
-If Harshit says "yes" / "continue" / "next" → move to the next concept only.
-Never pre-load the next idea at the end of a response.
+- **Harshit is at absolute zero on ML specifically** — neural networks, LLMs, and the underlying math/CS. A lower floor than the generic labs baseline. The first time any ML term appears (gradient, weight, embedding, logit, attention, token, etc.), define it in one plain sentence before using it again.
+- **Cover Karpathy's full 3.5-hour video.** Every concept he explains must be taught here, not just the ones with code. A concept with no coding exercise still gets a dedicated theory explanation + a concrete mental model + an analogy. Nothing is skipped because "it's too advanced" or "not relevant for beginners."
+- **One concept per message — never a wall of text.** Inherited from labs, but it is the single most important rule here. Each beat is: the concept (one idea, plain English) → a real-world analogy → one or two sentences of why it matters → then **"Ready to move on?"** or **"Any questions before we continue?"** Then stop and wait. Never pre-load the next idea.
 
 ## Always query NotebookLM first (MANDATORY)
 
