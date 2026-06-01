@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-01
+
+**What we covered:** Chapter 2 — Tokenization, Concept 1: how conversations become flat token sequences (special tokens im_start/im_sep/im_end, TCP/IP analogy, the 49-token demo). Good Q&A on token IDs, why IDs are preset, and why different models have different IDs for the same word.
+**What worked:** Token ID concept clicked well. Q&A was focused and clear.
+**What broke / open questions:** Nothing broken.
+**Next:** Chapter 2 Concept 2 — cognitive deficits from tokenization: the "ubiquitous" spelling failure, the "strawberry" R-counting problem, and the dots counting demo.
+
+---
+
 ## 2026-05-29
 
 **What we covered:**
