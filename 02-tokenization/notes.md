@@ -1,7 +1,13 @@
 # Chapter 2: Tokenization — Session Notes
 
-**Date:** 2026-06-01
+**Date:** 2026-06-02
 **Source:** Karpathy LLM Deep Dive (NotebookLM notebook `c43662e9-4bcb-4f29-a8e0-9a4a7990d835`)
+
+---
+
+## Diagram
+
+https://excalidraw.com/#json=PzlGEP4MqNCi_jP5uIMEA,vQWVHqhHoYW9tgGtZbnIMg
 
 ---
 
@@ -34,25 +40,84 @@ This entire exchange becomes **49 tokens** — Karpathy's TikTokenizer demo.
 
 ---
 
+## Concept 2 — Cognitive Deficits From Tokenization
+
+**Root cause:** Models cannot read text. By the time any text reaches the model — during training or during use — it has already been converted to token IDs. The individual letters are gone, absorbed into compressed chunks. The model has never seen raw text, ever.
+
+This creates three specific failure modes Karpathy demonstrates:
+
+**Demo 1 — The "ubiquitous" spelling failure**
+- Prompt: "print only every third character starting with the first one" — given "ubiquitous"
+- Model gets it wrong
+- TikTokenizer shows "ubiquitous" = **3 tokens**, not 10 characters
+- The model sees 3 opaque chunks. To extract every third character, it would need to mentally unpack which letters are inside each chunk and index into them. It can't do this reliably.
+
+**Demo 2 — The "strawberry" R-counting problem**
+- Prompt: "how many R's are in strawberry?"
+- State-of-the-art models confidently said **2** for years. The answer is 3.
+- Two failures compounding: (1) model can't see individual characters, (2) model is bad at mental counting
+- Modern models now get "strawberry" right — but only because they were drilled on that specific word in fine-tuning. The underlying problem wasn't fixed. The hole was patched.
+- Tried "skillfully": model said **3 L's**. Correct answer is **4**. Same failure, unpatched word.
+
+**Demo 3 — The dots counting failure**
+- Prompt: "how many dots are below" + a block of 177 dots
+- Model guesses **161**. Wrong.
+- TikTokenizer shows consecutive dots get grouped — 20 dots → 1 token. The model sees a handful of IDs, not 177 individual items. Mental arithmetic on abstract IDs in a single forward pass fails.
+
+**The fix — "use code":**
+Add "use code" to any prompt requiring character-level precision. The model writes a Python snippet and delegates to the interpreter, which natively handles strings and counting. Instantly correct. Not because the model got smarter — because it stopped trying to read and started delegating.
+
+---
+
+## Concept 3 — Why Character-Level Models Aren't the Fix
+
+**The obvious question:** if tokens cause all these problems, why not feed the model raw characters or bytes instead?
+
+**Why it doesn't work — sequence length:**
+Sequence length is a finite, expensive resource in neural networks. Every position costs compute.
+
+| | Token sequences | Character sequences |
+|---|---|---|
+| "ubiquitous" | 3 positions | 10 positions |
+| Sequence length | Short (efficient) | 3–4× longer |
+| Character access | Lost | Direct |
+| Current feasibility | Yes | Not at scale |
+
+BPE is a deliberate compression deal: sacrifice character-level visibility to keep sequences short enough to train and run efficiently. Karpathy: until researchers figure out how to handle very long sequences, we remain in "the token world."
+
+**Practical conclusion:** don't fight the architecture. For character-level tasks, use code.
+
+---
+
+## Key numbers
+
+| Thing | Number |
+|---|---|
+| "ubiquitous" → tokens | 3 |
+| "strawberry" → tokens | 2–3 |
+| Karpathy's conversation demo | 49 tokens |
+| Dots in counting demo | 177 (model guessed 161) |
+| user token ID in GPT-4 | 428 |
+| `<\|im_start\|>` token ID | 100,264 |
+
+---
+
 ## Q&A from the session
 
-**Q: What exactly are the 49 tokens — why so many for such a short exchange?**
-A: Every word, space, newline, and special delimiter becomes its own token (or part of one). The special delimiters alone account for 8+ tokens before any actual words. `<|im_start|>` × 2 (once per turn) + `<|im_sep|>` × 2 + `<|im_end|>` × 2 + role labels + newlines + every word in both messages = 49 total.
+**Q: Why doesn't "ubiquitous" become 1 token?**
+A: BPE only merges frequent pairs. Common words like "the" appear billions of times → merged early → 1 token. "Ubiquitous" is rare — BPE never justified giving it its own token, so it stays as 3 chunks. Token count ≈ how common the word is. Nonsense strings fragment all the way to individual bytes.
 
-**Q: Why multiply by 2 for the special tokens?**
-A: Two turns in the conversation — user turn and assistant turn. Each turn uses the full `<|im_start|> [role] <|im_sep|> [message] <|im_end|>` template. So each special token appears once per turn × 2 turns = 2 total. A 4-turn conversation would have each special token appear 4 times.
+**Q: Why do modern models get "strawberry" right now?**
+A: They were drilled on it. That exact question appeared enough times in fine-tuning data that the model memorised the answer. It didn't develop the ability to count characters — it memorised the answer for that word. Try any other word and the failure reappears.
 
-**Q: What is a token ID?**
-A: The model only works with numbers, not text. Every token in the vocabulary is assigned a permanent number — its ID. `user` = ID 428 in GPT-4's tokenizer. `<|im_start|>` = ID 100264. The model receives these numbers; it never sees raw text. It learned what each ID means through training.
+**Q: A car wash is 100ft away — walk or drive? Why might a model fail this?**
+A: Not a tokenization failure — this is the "Swiss cheese" model of LLM capabilities (covered in Ch.6). Models can solve PhD-level physics but randomly fail trivial common-sense questions. Karpathy's example: "which is bigger, 9.11 or 9.9?" — models said 9.11 because Bible verse neurons fired (9:11 comes after 9:9 in scripture). The model applied the wrong context. Car wash is the same shape: model reasons about distance, misses the obvious constraint that you need the car there.
 
-**Q: Are IDs preset / fixed?**
-A: Yes. IDs are fixed when the tokenizer is built — BPE runs, the vocabulary is assembled, each token gets an ID sequentially. Special tokens are added at the end (hence the high IDs like 100264+). The IDs never change during use. They're baked in at build time.
-
-**Q: Do different models have different IDs for the same word?**
-A: Yes. Each team runs BPE independently on their own dataset. Merge order differs, vocabulary differs, IDs differ. `user` might be 428 in GPT-4, a completely different number in LLaMA 3 or Claude. This is why you can't mix tokenizers — token IDs from one model fed into another are gibberish. The model and its tokenizer are always a matched pair.
+**Q: "Models convert words into tokens" — is that right?**
+A: Almost. The order matters: the tokenizer runs before the model ever exists — at training time, and again instantly when you send a message. The model has never seen raw text at any point. Always token IDs, all the way through. Tighter: "Models can't read text — they only ever see token IDs. Your words get converted to numbers before the model touches them."
 
 ---
 
 ## Next
 
-**Concept 2: Cognitive deficits caused by tokenization** — why the model can't spell or count (the "ubiquitous" demo, the "strawberry" R-counting failure, and the dots counting failure). Karpathy's three specific breakage demos.
+**Chapter 3: Transformer Architecture** — token embeddings, attention heads, residual stream, logits. How the model actually processes those token IDs and produces a prediction.
