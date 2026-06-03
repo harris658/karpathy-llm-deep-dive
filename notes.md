@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-03
+
+**What we covered:** Chapter 3 — Transformer Architecture, complete. All 6 concepts: (1) neural network as a stateless math function, parameters as knobs, (2) token embeddings — token IDs to vectors, (3) attention block — tokens look at each other to update context, (4) MLP block — each token processes alone, world knowledge lives here, (5) logits and softmax — raw scores to probability distribution, (6) scale — 85K demo to 405B Llama 3 to ~1T frontier.
+**What worked:** Very heavy Q&A session — Harshit challenged almost every analogy. Vending machine analogy for the math function was dropped and replaced with plain explanation. Memory question was a great catch — led to the "folder of letters" explanation of context window. Parameters vs tokens confusion resolved well. "How does it decide blue scores highest?" was handled by telling him that's what the next 5 concepts answer.
+**What broke / open questions:** None broken. Several analogies needed iteration to land.
+**Next:** Chapter 4 — Pretraining & Inference. Training loop detail, base model inference, sampling strategies (temperature, top-k), what base model behaviour looks like before fine-tuning.
+
+---
+
 ## 2026-06-02
 
 **What we covered:** Chapter 2 — Tokenization, complete. All 3 concepts: (1) how conversations become flat token sequences with special tokens, (2) cognitive deficits from tokenization — ubiquitous/strawberry/dots demos + "use code" fix, (3) why character-level models aren't feasible (sequence length). Good Q&A throughout.
