@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-04
+
+**What we covered:** Chapter 4 started — Concept 1: The Training Loop (loss, labels free from text structure, backprop runs through entire Ch.3 pipeline, pretraining vs fine-tuning distinction). Heavy Q&A: what "free labels" means, how backprop touches token IDs and embeddings, why humans don't write labels during pretraining.
+**What worked:** Pretraining vs fine-tuning distinction landed well after Q&A. "Free labels" click from the table showing how one sentence contains its own labels.
+**What broke / open questions:** None.
+**Next:** Chapter 4 Concept 2 — Scale. 1 million tokens per step, live GPT-2 training run Karpathy shows, loss curve, why pretraining costs tens of millions of dollars.
+
+---
+
 ## 2026-06-03
 
 **What we covered:** Chapter 3 — Transformer Architecture, complete. All 6 concepts: (1) neural network as a stateless math function, parameters as knobs, (2) token embeddings — token IDs to vectors, (3) attention block — tokens look at each other to update context, (4) MLP block — each token processes alone, world knowledge lives here, (5) logits and softmax — raw scores to probability distribution, (6) scale — 85K demo to 405B Llama 3 to ~1T frontier.
