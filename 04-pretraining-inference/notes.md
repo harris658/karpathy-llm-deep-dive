@@ -165,7 +165,7 @@ You start with your compute budget (GPU-hours), then apply scaling laws. The Chi
 
 ## Diagram
 
-*(To be drawn — Training loop + base model inference flow)*
+https://excalidraw.com/#json=jn87kwl4PvCTrmyJr2GWC,FKoHGmbfvSFNWH22-McizQ
 
 ---
 
