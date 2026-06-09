@@ -121,7 +121,9 @@ No system prompt or misconfigured identity. Without "you are Claude, made by Ant
 
 ## Diagram
 
-*(To be drawn — Base model → SFT data format → fine-tuned assistant)*
+[Chapter 5 SFT Architecture](https://excalidraw.com/#json=X1jwf3UW9u0IbIAvEdP-o,gQdY0o4TLcPBoKgYEZnw7g)
+
+Shows: Pre-trained Base LLM + SFT Dataset → fine-tuning loop (response-only loss) → Instruction-Following LLM + System Prompt
 
 ---
 
