@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-09
+
+**What we covered:** Chapter 4 complete — Concepts 2–5: Scale (batch size, loss curve, GPT-2 run, why pretraining costs millions, scaling laws, model size vs training), Base Model (internet document simulator, lossy zip file), Inference (biased coin flip, stochastic generation, remixes), Base Model Behavior (zebra demo, 2024 election hallucination, "what is 2+2" demo).
+**What worked:** Deep Q&A on model size vs training (common misconception fully resolved). Scaling laws and Chinchilla ratio clicked well. Hallucination demos made the base model limitations concrete.
+**What broke / open questions:** None.
+**Next:** Chapter 5 — Supervised Fine-Tuning. How a base model becomes an assistant: conversation data format, what fine-tuning changes vs preserves, why it's cheap relative to pretraining.
+
+---
+
 ## 2026-06-04
 
 **What we covered:** Chapter 4 started — Concept 1: The Training Loop (loss, labels free from text structure, backprop runs through entire Ch.3 pipeline, pretraining vs fine-tuning distinction). Heavy Q&A: what "free labels" means, how backprop touches token IDs and embeddings, why humans don't write labels during pretraining.
