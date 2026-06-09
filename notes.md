@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-09 (Ch.5)
+
+**What we covered:** Chapter 5 complete — SFT: algorithm unchanged / only data changes, labeling instructions (helpful+truthful+harmless, chain-of-thought on math), hallucinations persist + fixes (deliberate injection, tool use), system prompt (invisible tokens, bolted-on identity), modern synthetic SFT datasets.
+**What worked:** System prompt clicked immediately via real Opus 4.8/DeepSeek Reddit incident. Bootstrapping problem (first model = pure humans) resolved cleanly.
+**What broke / open questions:** None.
+**Next:** Chapter 6 — LLM Psychology. Swiss cheese capabilities, hallucination, tool use, memory, jagged intelligence.
+
+---
+
 ## 2026-06-09
 
 **What we covered:** Chapter 4 complete — Concepts 2–5: Scale (batch size, loss curve, GPT-2 run, why pretraining costs millions, scaling laws, model size vs training), Base Model (internet document simulator, lossy zip file), Inference (biased coin flip, stochastic generation, remixes), Base Model Behavior (zebra demo, 2024 election hallucination, "what is 2+2" demo).
