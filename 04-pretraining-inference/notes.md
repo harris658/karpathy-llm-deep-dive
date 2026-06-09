@@ -165,7 +165,7 @@ You start with your compute budget (GPU-hours), then apply scaling laws. The Chi
 
 ## Diagram
 
-https://excalidraw.com/#json=jn87kwl4PvCTrmyJr2GWC,FKoHGmbfvSFNWH22-McizQ
+https://excalidraw.com/#json=I2bdZ6rjc9d8WOejgfDA3,32nsb_vfSCdJebgdV_WIVA
 
 ---
 
