@@ -121,9 +121,9 @@ No system prompt or misconfigured identity. Without "you are Claude, made by Ant
 
 ## Diagram
 
-[Chapter 5 SFT Architecture](https://excalidraw.com/#json=Lg8kD7lGF0i3sWLMxPxOQ,TiBr8hb2J43iHr4hcgXZAQ)
+[Chapter 5 SFT — All 5 Concepts](https://excalidraw.com/#json=aAV8HtlP0IfZaTZC8Jics,a40r1q9-4xFFpHmwEvdqAQ)
 
-Shows: Pre-trained Base LLM + SFT Dataset → fine-tuning loop (response-only loss) → Instruction-Following LLM + System Prompt
+5 concept zones: (1) What SFT Is — Base LLM + SFT Dataset → Same Training Loop → Assistant; (2) Labeling Instructions — bad vs good CoT response; (3) Hallucinations Persist — Orson Kovats demo + two fixes; (4) The System Prompt — invisible tokens flow; (5) Modern SFT Datasets — InstructGPT → modern hybrid + bootstrapping circle + quality gate
 
 ---
 
