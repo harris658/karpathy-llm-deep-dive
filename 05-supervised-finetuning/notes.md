@@ -121,7 +121,7 @@ No system prompt or misconfigured identity. Without "you are Claude, made by Ant
 
 ## Diagram
 
-[Chapter 5 SFT Architecture](https://excalidraw.com/#json=9owjKEhWDbif4ohk2KSkf,EVx_GWK4QfBCQbshAmBlmA)
+[Chapter 5 SFT Architecture](https://excalidraw.com/#json=Lg8kD7lGF0i3sWLMxPxOQ,TiBr8hb2J43iHr4hcgXZAQ)
 
 Shows: Pre-trained Base LLM + SFT Dataset → fine-tuning loop (response-only loss) → Instruction-Following LLM + System Prompt
 
