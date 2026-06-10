@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-10 (Ch.6 — in progress)
+
+**What we covered:** Chapter 6 started — Concepts 1 & 2: Jagged Intelligence (Swiss cheese capability model, uneven skill profile), Hallucinations: The Confident Liar (statistical token tumbler, Orson Kovats demo, why confident tone ≠ correct answer).
+**What worked:** Jagged intelligence framing landed as a clean lens for the whole chapter. Hallucination root cause (SFT training data always written in confident tone) clicked well.
+**What broke / open questions:** HF free inference API blocking Falcon 7B and Mistral 7B — hallucination_demo.py couldn't run live. Demo explained conceptually instead.
+**Next:** Concept 3 — Fixing Hallucinations: empirical probing (Dominic Hasek Stanley Cup example), injecting "I don't know" training examples to wire uncertainty to verbal refusals.
+
+---
+
 ## 2026-06-09 (Ch.5)
 
 **What we covered:** Chapter 5 complete — SFT: algorithm unchanged / only data changes, labeling instructions (helpful+truthful+harmless, chain-of-thought on math), hallucinations persist + fixes (deliberate injection, tool use), system prompt (invisible tokens, bolted-on identity), modern synthetic SFT datasets.
