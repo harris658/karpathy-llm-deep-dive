@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-16 (Ch.6 — in progress)
+
+**What we covered:** Chapter 6 Concepts 3–5: Fixing Hallucinations (empirical probing pipeline, Dominic Hasek Stanley Cup demo, LLM judge, injecting "I don't know"), Memory Two Types (parameters = vague recollection, context window = perfect working memory, Pride & Prejudice demo), Tool Use (search_start/search_end tokens pause generation + web search, code interpreter offloads math to Python, Orson Kovats and Hasek demos revisited with modern ChatGPT).
+**What worked:** Q&A was sharp — Harshit independently connected Ch.5's web-search fix to Ch.6 tool use. The "entire pipeline is automated" point resolved a recurring concern about scale. Parameter vs context window distinction clicked cleanly via the re-reading analogy.
+**What broke / open questions:** None.
+**Next:** Concept 6 — No Persistent Self: model boots fresh every turn, no memory of prior conversations, identity injected via system prompt + SFT.
+
+---
+
 ## 2026-06-10 (Ch.6 — in progress)
 
 **What we covered:** Chapter 6 started — Concepts 1 & 2: Jagged Intelligence (Swiss cheese capability model, uneven skill profile), Hallucinations: The Confident Liar (statistical token tumbler, Orson Kovats demo, why confident tone ≠ correct answer).
