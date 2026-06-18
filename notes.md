@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-18 (Ch.6 — complete)
+
+**What we covered:** Chapter 6 Concepts 6–9: No Persistent Self (boot up/shut off, Falcon 7B hallucinated identity, OLMo 240 hardcoded SFT conversations, hidden system message), Models Need Tokens to Think (fixed computation per token, "mean prompt" single-token forced failure, chain-of-thought), Token Blindness (tokenizer compresses letters, ubiquitous/strawberry/dots demos, "use code" fix), Bizarre Distractions (9.11 > 9.9 failure, Bible verse neurons hijack math, closes Swiss cheese loop). Chapter 6 complete.
+**What worked:** NotebookLM query pattern enforced — all concepts grounded in Karpathy's exact demos and phrasing. Clean session, no Q&A detours.
+**What broke / open questions:** None.
+**Next:** Chapter 7 — Reinforcement Learning: RLHF, reward models, reward hacking, DeepSeek-R1, AlphaGo analogy.
+
+---
+
 ## 2026-06-16 (Ch.6 — in progress)
 
 **What we covered:** Chapter 6 Concepts 3–5: Fixing Hallucinations (empirical probing pipeline, Dominic Hasek Stanley Cup demo, LLM judge, injecting "I don't know"), Memory Two Types (parameters = vague recollection, context window = perfect working memory, Pride & Prejudice demo), Tool Use (search_start/search_end tokens pause generation + web search, code interpreter offloads math to Python, Orson Kovats and Hasek demos revisited with modern ChatGPT).

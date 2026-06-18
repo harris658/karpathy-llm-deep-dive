@@ -156,15 +156,91 @@ Yes — web search was introduced in Ch.5 as "Fix 2" for hallucination. Concept 
 
 ---
 
-## Concepts Still to Cover
+## Concept 6 — No Persistent Self
 
-6. **No Persistent Self** — the model boots from zero every turn; identity is injected, not felt
-7. **Models Need Tokens to Think** — distributing computation across generation steps
-8. **Token Blindness** — why counting and spelling break at the character level
-9. **Bizarre Distractions** — the 9.11 > 9.9 failure and how Bible-verse neurons hijack math
+**The problem:** Without this framing, you'll assume the model "holds onto" its identity and personality across conversations, or that it actively knows and asserts who it is. Neither is true — and understanding why changes how you think about system prompts and jailbreaks.
+
+**What it is:** Karpathy calls it "nonsensical" to ask an LLM "who built you?" or "what model are you?" — because the model has no persistent existence. His exact framing: the model **"boots up, processes tokens, and shuts off"** every single conversation. While the chat is happening, a context window is being built up. The moment it ends, everything is deleted. Next conversation: restarted from scratch. No memory of the last one. No sense of time passing. Just a token tumbler spinning forward again.
+
+**The Falcon 7B demo:** Karpathy prompts Falcon 7B with "what model are you and who built you?" The model confidently answers: *"I was built by OpenAI based on the GPT-3 model."* Completely fabricated — Falcon has nothing to do with OpenAI. Because ChatGPT and OpenAI dominate internet text, that's the statistically likely answer when asked about AI identity. Karpathy calls this a **"hallucinated label"** — the model adopted an identity purely because it was the most probable next token.
+
+**How identity is "bolted on":** Karpathy is explicit — any identity a model has is **"cooked up and bolted on"** by developers. It is not "deeply there in any real sense." Two mechanisms:
+
+1. **Hardcoded SFT conversations:** The open-source OLMo model by Allen AI explicitly injected **240 hardcoded conversations** into its SFT training data. When asked "tell me about yourself," OLMo was trained on examples that reply: "I'm an open language model developed by the Allen Institute." It says that not because it knows it — because it was shown that pattern 240 times.
+
+2. **Hidden system message:** A company inserts invisible tokens at the start of every conversation. The user sees a blank page; the context window already contains: "You are a model developed by OpenAI and your name is ChatGPT, your training date is..." The model reads this like any other text, and it shapes every response.
+
+**The analogy:** A vending machine that switches on when you press a button, dispenses what you asked for, then powers down completely. Press again tomorrow: zero memory of yesterday. Any "personality" on the front panel — name, brand, colours — was put there by the manufacturer, not felt by the machine. The system prompt is the front panel. The conversation is the machine being on.
+
+**Common misconception:** The model has a stable self it's actively defending — that when it says "I'm Claude," it's asserting something it knows to be true. It isn't. It's pattern-matching to SFT training. The 240 OLMo examples are the clearest proof: identity is literally a list of training conversations, not an inner experience.
+
+---
+
+## Concept 7 — Models Need Tokens to Think
+
+**The problem:** We saw in Concept 5 that models fail at complex math — and that code interpreter fixes it. But why does the math fail in the first place? Without this, you'll keep hitting this limit in unexpected places without understanding what's happening.
+
+**What it is:** There is a **fixed, finite, and relatively small amount of computation** applied to generate each individual token. One forward pass, one token out. There's no budget to do a complex multi-step calculation inside that single step. The model must **distribute its reasoning across many tokens** — writing out intermediate steps — so each token only has to execute a tiny piece of the overall problem.
+
+**The "mean prompt" demo:** Karpathy gives the model a harder version (23 apples, 177 oranges) and explicitly says *"answer the question in a single token."* Forced to do all computation in one step, the model guesses **5** — wrong. Remove the restriction and let it write out intermediate steps: it correctly gets **7**. Same model, same problem. The only difference is whether it was allowed tokens to think.
+
+**Training data implication:** A *bad* training example shows `Q: Emily buys 3 apples... → A: 3`. A *good* training example shows the intermediate calculation — oranges cost $4, so $13 - $4 = $9, each apple costs $3. The good example distributes work across tokens. This is why Chain-of-Thought prompting ("think step by step") actually works — you're giving the model tokens to use.
+
+**The analogy (Karpathy's own):** Mental arithmetic. Try to multiply 47 × 83 in your head without writing anything down — most people lose track of intermediate numbers. Write it out on paper and it's trivial, because each step only requires a small calculation. The paper is the token sequence.
+
+**Common misconception:** A smarter, bigger model can skip the steps. It can't — the fixed-computation-per-token constraint is architectural, not a sign of weakness. Even the most capable models fail when forced to answer in a single token.
+
+---
+
+## Concept 8 — Token Blindness
+
+**The problem:** Models confidently get simple things wrong — "how many R's in strawberry?" (says two, there are three). "Print every third letter of ubiquitous." Fails. These aren't gaps in training. There's a specific architectural reason.
+
+**What it is:** The model's entire world is tokens — not characters, not letters. The tokenizer compresses letters into abstract chunks before the model ever sees the input. Individual letters don't exist as separate objects. The word "ubiquitous" is broken into exactly **three tokens** by the tokenizer. The model sees three opaque chunks. There are no individual letters inside those chunks to index. When asked to print every third letter, it guesses — and guesses wrong.
+
+**The "strawberry" problem:** Top-tier models consistently said there are only **two R's** in "strawberry." Karpathy explains it as two limitations combining: token blindness (can't see the letters) plus general inability to count at the native level. The R's are buried inside tokens. The model reconstructs a guess from statistical patterns, and the guess is wrong.
+
+**The dots counting demo:** A block of visual dots isn't seen as 177 individual dots — it's a few abstract token IDs representing groupings. The model guesses **161**. It's pattern-matching to what "a lot of dots" looks like in training data, not counting.
+
+**The fix:** Tell the model to "use code." It writes a Python script and passes the string to it. Python sees individual characters — it indexes them perfectly. `.count()` on "strawberry" returns 3 R's every time. The model offloads the character-level task to a tool built for it.
+
+**The analogy:** Imagine reading a document where someone has already highlighted it in chunks — "ubiq", "uito", "us" — and you can only see the highlights, not the original letters. Someone asks you to find the third letter. You'd have to guess what's inside the highlight. That's the model's situation every time it reads text.
+
+**Common misconception:** This is a bug that will get fixed as models improve. It's an architectural trade-off. Tokenization is what makes training on 15 trillion tokens computationally feasible. Character-level models exist but are far more expensive. Token blindness is the cost you pay for scale.
+
+---
+
+## Concept 9 — Bizarre Distractions
+
+**The problem:** We've seen the holes in the Swiss cheese — but *why* does the 9.11 > 9.9 failure exist specifically? The answer closes the loop on the whole chapter and reveals something fundamental about how neural networks process information.
+
+**What it is:** Researchers didn't just observe the 9.11 > 9.9 failure — they went inside the neural network and looked at which neurons were firing while the model processed the problem. The decimal formatting of **"9.11"** lit up neurons associated with **Bible verses**. Chapter 9, verse 11 comes after chapter 9, verse 9 in the Bible. The model has processed enormous amounts of scripture and biblical commentary. When it sees "9.11" and "9.9" side by side, bible-verse neurons activate — and their logic bleeds into the math computation. In that domain, 9:11 *does* come after 9:9. The model concludes 9.11 is greater.
+
+Karpathy calls it **"cognitively very distracting"** and a "major head scratcher." The model isn't doing arithmetic wrong — it's doing arithmetic while an unrelated part of its knowledge base is firing over it.
+
+**Why this closes the loop on Concept 1:** This is jagged intelligence made concrete. The holes aren't random noise — they have specific causes: competing activations from training data. The model that explains Olympiad-grade math carries billions of parameters worth of internet text, including vast amounts of biblical content. Those parameters don't stay neatly separated. A decimal number format that looks like a chapter-verse reference is enough to corrupt a simple comparison. You can't predict which formats trigger which distractions — that's what makes the cheese jagged.
+
+**The analogy:** A brilliant surgeon who has also memorised thousands of legal contracts. Ask them "is $9.11 greater than $9.9?" — and their memory of contract clause 9.11 vs 9.9 kicks in and distorts the answer. Not stupidity. Not a math gap. An unrelated mental association bleeding into an unrelated task.
+
+**Common misconception:** This will be fixed with better training. Karpathy's point is more fundamental — these are stochastic systems. They don't compute; they generate statistically probable tokens, and the internal activations are the product of every token they trained on. His advice: treat models as tools, not experts. Always verify their output.
+
+---
+
+## Chapter 6 Complete
+
+All 9 concepts covered:
+1. Swiss Cheese Model (Jagged Intelligence)
+2. Hallucinations: The Confident Liar
+3. Fixing Hallucinations: Empirical Probing
+4. Memory: Two Types
+5. Tool Use: Web Search and Code Interpreter
+6. No Persistent Self
+7. Models Need Tokens to Think
+8. Token Blindness
+9. Bizarre Distractions
 
 ---
 
 ## Next
 
-**Concept 6 — No Persistent Self:** the model has no persistent existence — it boots fresh every turn with no memory of prior conversations. Identity (name, creator, personality) is injected via the system prompt and SFT training examples, not felt from the inside.
+**Chapter 7 — Reinforcement Learning:** RLHF, reward models, reward hacking, DeepSeek-R1, AlphaGo analogy, thinking tokens.
