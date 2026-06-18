@@ -241,6 +241,12 @@ All 9 concepts covered:
 
 ---
 
+## Diagram
+
+https://excalidraw.com/#json=zi8tZWcZ3GitDy2EGo_Qt,Lf6-ELDiHTiQ-okMMSyD7g
+
+---
+
 ## Next
 
 **Chapter 7 — Reinforcement Learning:** RLHF, reward models, reward hacking, DeepSeek-R1, AlphaGo analogy, thinking tokens.
