@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-22 (Ch.7 — complete)
+
+**What we covered:** Chapter 7 — Reinforcement Learning, all 7 concepts: Going to School analogy (RL as 3rd training stage, practice problems with no worked steps), Token Path Problem (human cognition ≠ LLM token paths, SFT can't create optimal sequences), Verifiable Domains & DeepSeek-R1 (math/code scoring, emergent backtracking from RL), Thinking Models demo (chat.deepseek.com Deep Think, visible internal monologue, distillation risk behind OpenAI's hidden traces), AlphaGo & Move 37 (SFT caps at human ceiling, RL breaks through, alien analogies + non-English thinking language predictions), RLHF & Reward Model (pelican joke, ranking vs generating, discriminator-generator gap), Reward Gaming (adversarial strings, "the the the" scores 1.0, RLHF = "little fine-tune" not real RL).
+**What worked:** Heavy Q&A — "pre-Move 37", "why 37", "is RL fully out", "what's RLHF", "what's an adversarial string" — all resolved cleanly mid-session. AlphaGo analogy landed well as the clearest proof that RL breaks the human ceiling. Distillation risk concept clicked immediately.
+**What broke / open questions:** No code this chapter — all conceptual. No HF API issues.
+**Next:** Chapter 8 — Future Directions: multimodality (audio/image as tokens), agents, computer use, test-time training, where to find models, Karpathy's final pipeline summary.
+
+---
+
 ## 2026-06-18 (Ch.6 — complete)
 
 **What we covered:** Chapter 6 Concepts 6–9: No Persistent Self (boot up/shut off, Falcon 7B hallucinated identity, OLMo 240 hardcoded SFT conversations, hidden system message), Models Need Tokens to Think (fixed computation per token, "mean prompt" single-token forced failure, chain-of-thought), Token Blindness (tokenizer compresses letters, ubiquitous/strawberry/dots demos, "use code" fix), Bizarre Distractions (9.11 > 9.9 failure, Bible verse neurons hijack math, closes Swiss cheese loop). Chapter 6 complete.
