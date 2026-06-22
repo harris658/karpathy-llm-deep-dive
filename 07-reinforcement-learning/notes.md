@@ -230,7 +230,7 @@ An input that exploits the mathematical structure of a neural network to get an 
 
 ## Diagram
 
-*(To be added)*
+https://excalidraw.com/#json=tjSA788-ii5lGuMV4l0jo,3UPhdrBHAGQgpNUbYjMiIw
 
 ---
 
