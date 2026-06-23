@@ -4,6 +4,15 @@ Running log. One entry per working session. Newest at the top.
 
 ---
 
+## 2026-06-23 (Ch.8 — complete)
+
+**What we covered:** Chapter 8 — Future Directions, all 6 concepts: Multimodality (image/audio patches tokenized into the same sequence, no new architecture needed), Agents (models operating over minutes/hours, human-to-agent supervision ratio), Computer Use (screenshot + keyboard/mouse control, ChatGPT Operator as early example), Test-Time Training (fixed parameters can't scale to long-running multimodal tasks, sleeping brain analogy, major open research problem), Keeping Track of AI Progress (Chatbot Arena leaderboard now "a little gamed", AI News newsletter by swix, X/Twitter for breaking news), Where to Find Models (proprietary → provider sites, open-weight → Together.ai, base models → Hyperbolic, local → LM Studio).
+**What worked:** Multimodality Q&A resolved cleanly — Harshit caught that some frontier models already do all three modalities and the "future directions" framing needed clarification. Clean session, no code, all conceptual.
+**What broke:** None.
+**Next:** This is the final chapter. Karpathy's full 3.5-hour video is now completely covered across 8 chapters.
+
+---
+
 ## 2026-06-22 (Ch.7 — complete)
 
 **What we covered:** Chapter 7 — Reinforcement Learning, all 7 concepts: Going to School analogy (RL as 3rd training stage, practice problems with no worked steps), Token Path Problem (human cognition ≠ LLM token paths, SFT can't create optimal sequences), Verifiable Domains & DeepSeek-R1 (math/code scoring, emergent backtracking from RL), Thinking Models demo (chat.deepseek.com Deep Think, visible internal monologue, distillation risk behind OpenAI's hidden traces), AlphaGo & Move 37 (SFT caps at human ceiling, RL breaks through, alien analogies + non-English thinking language predictions), RLHF & Reward Model (pelican joke, ranking vs generating, discriminator-generator gap), Reward Gaming (adversarial strings, "the the the" scores 1.0, RLHF = "little fine-tune" not real RL).
